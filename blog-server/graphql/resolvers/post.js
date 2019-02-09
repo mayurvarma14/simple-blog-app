@@ -1,7 +1,7 @@
 const { Post, User } = require("../../models");
 const { getUser } = require("./helper");
 module.exports = {
-  posts: async () => {
+  posts: async (args, ctx) => {
     try {
       const posts = await Post.find();
       return posts.map(post => {
@@ -12,14 +12,17 @@ module.exports = {
       throw err;
     }
   },
-  createPost: async args => {
+  createPost: async (args, ctx) => {
+    if (!ctx.state.isAuth) {
+      throw new Error("Unauthorized");
+    }
     const post = new Post({
       ...args.post,
-      author: "5c5b4c94441f10193b4f6087"
+      author: ctx.state.userId
     });
     try {
       const result = await post.save();
-      const user = await User.findById("5c5b4c94441f10193b4f6087");
+      const user = await User.findById(ctx.state.userId);
       if (!user) {
         throw new Error("User not found!");
       }

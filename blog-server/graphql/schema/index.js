@@ -13,8 +13,14 @@ module.exports = buildSchema(`
       password:String
       posts:[Post!]
     }
+    type AuthData{
+        userId:ID!
+        token:String!
+        tokenExpiration:Int!
+    }
     type RootQuery{
         posts:[Post!]!
+        login(email:String!,password:String!):AuthData!
     }
     input PostInput{
         title:String!

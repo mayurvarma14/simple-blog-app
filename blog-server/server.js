@@ -5,7 +5,7 @@ const graphqlHTTP = require("koa-graphql");
 const mongoose = require("mongoose");
 const graphqlSchema = require("./graphql/schema");
 const graphqlResolvers = require("./graphql/resolvers");
-
+const { isAuth } = require("./middleware");
 const router = new Router();
 const app = new Koa();
 
@@ -18,6 +18,7 @@ router.all(
   })
 );
 
+app.use(isAuth);
 app.use(router.routes());
 
 mongoose
