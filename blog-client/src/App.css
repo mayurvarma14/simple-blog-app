@@ -1,0 +1,18 @@
+.header {
+  color: white;
+  /* background: #f1f1f1; */
+}
+.header div {
+  font-size: 18px;
+}
+.header i {
+  padding-right: 10px;
+}
+.content {
+  padding: 20px 3%;
+  min-height: calc(100vh - 64px);
+  background: #f1f1f1;
+}
+/* .footer {
+  background: #f1f1f1;
+} */
